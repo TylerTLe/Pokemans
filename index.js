@@ -4,8 +4,10 @@ const c = canvas.getContext('2d')
 canvas.width = 1024
 canvas.height = 576
 
-c.fillStyle = 'white'
-c.fillRect(0, 0, canvas.width, canvas.height)
+const collisionsMap = []
+for (let  i = 0; i < collisions.length; i+= 70) {
+    collisionsMap.push(collisions.slice(i,i+70))
+}
 
 // Map Image
 const image = new Image()
@@ -63,27 +65,32 @@ function animation() {
         playerImage.height,
     )
 
-    if (keys.w.pressed) background.posistion.y = background.posistion.y + 3
-    else if (keys.a.pressed) background.posistion.x = background.posistion.x + 3
-    else if (keys.s.pressed) background.posistion.y = background.posistion.y - 3
-    else if (keys.d.pressed) background.posistion.x = background.posistion.x - 3
+    if (keys.w.pressed && lastKey === 'w') background.posistion.y += 3
+    else if (keys.a.pressed && lastKey === 'a') background.posistion.x += 3
+    else if (keys.s.pressed && lastKey === 's') background.posistion.y -= 3
+    else if (keys.d.pressed && lastKey === 'd') background.posistion.x -= 3
     
 }
 animation()
 
+let lastKey = ''
 window.addEventListener('keydown', (e) => {
     switch (e.key) {
         case 'w':
-        keys.w.pressed = true
+            keys.w.pressed = true
+            lastKey = 'w'
             break
         case 'a':
-        keys.a.pressed = true
+            keys.a.pressed = true
+            lastKey = 'a'
             break
         case 's':
-        keys.s.pressed = true
+            keys.s.pressed = true
+            lastKey = 's'
             break
         case 'd':
-        keys.d.pressed = true
+            keys.d.pressed = true
+            lastKey = 'd'
             break
     }
 })
@@ -91,16 +98,16 @@ window.addEventListener('keydown', (e) => {
 window.addEventListener('keyup', (e) => {
     switch (e.key) {
         case 'w':
-        keys.w.pressed = false
+            keys.w.pressed = false
             break
         case 'a':
-        keys.a.pressed = false
+            keys.a.pressed = false
             break
         case 's':
-        keys.s.pressed = false
+            keys.s.pressed = false
             break
         case 'd':
-        keys.d.pressed = false
+            keys.d.pressed = false
             break
     }
 })
