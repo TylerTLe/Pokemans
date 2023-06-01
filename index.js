@@ -9,7 +9,7 @@ for (let i = 0; i < collisions.length; i += 70) {
   collisionsMap.push(collisions.slice(i, 70 + i));
 }
 
-class Boundry {
+class Boundary {
   static height = 48;
   static width = 48;
   constructor({ position }) {
@@ -34,10 +34,10 @@ collisionsMap.forEach((row, i) => {
   row.forEach((symbol, j) => {
     if (symbol === 1025)
       boundaries.push(
-        new Boundry({
+        new Boundary({
           position: {
-            x: j * Boundry.width + offset.x,
-            y: i * Boundry.height + offset.y,
+            x: j * Boundary.width + offset.x,
+            y: i * Boundary.height + offset.y,
           },
         })
       );
@@ -52,15 +52,39 @@ const playerImage = new Image();
 playerImage.src = "./Images/playerDown.png";
 
 class Sprite {
-  constructor({ position, velocity, image }) {
+  constructor({ position, velocity, image, frames = {max: 1 }}) {
     this.position = position;
     this.image = image;
+    this.frames = frames
   }
 
   draw() {
-    c.drawImage(this.image, this.position.x, this.position.y);
+    c.drawImage(
+        this.image,
+        0,
+        0,
+        this.image.width / this.frames.max,
+        this.image.height,
+        this.position.x,
+        this.position.y,
+        this.image.width / this.frames.max,
+        this.image.height
+      );
   }
 }
+
+const player = new Sprite({
+    position: {
+        x: canvas.width / 2 - 192 / 4 / 2,
+        y: canvas.height / 2 - 68 / 2
+    },
+    image: playerImage,
+    frames: {
+        max: 4
+    }
+})
+
+
 
 const background = new Sprite({
   position: {
@@ -85,7 +109,7 @@ const keys = {
   },
 };
 
-const testBoundary = new Boundry({
+const testBoundary = new Boundary({
   position: {
     x: 400,
     y: 400,
@@ -97,21 +121,11 @@ const moveables = [background, testBoundary];
 function animation() {
   window.requestAnimationFrame(animation);
   background.draw();
-  // boundaries.forEach(boundry =>  {
-  //     boundry.draw()
+  // boundaries.forEach(Boundary =>  {
+  //     Boundary.draw()
   // })
   testBoundary.draw();
-  c.drawImage(
-    playerImage,
-    0,
-    0,
-    playerImage.width / 4,
-    playerImage.height,
-    canvas.width / 2 - playerImage.width / 2,
-    canvas.height / 2 - playerImage.height / 2,
-    playerImage.width / 4,
-    playerImage.height
-  );
+  player.draw()
 
   if (keys.w.pressed && lastKey === "w") {
     moveables.forEach((moveable) => {
