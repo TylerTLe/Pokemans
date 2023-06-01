@@ -52,39 +52,37 @@ const playerImage = new Image();
 playerImage.src = "./Images/playerDown.png";
 
 class Sprite {
-  constructor({ position, velocity, image, frames = {max: 1 }}) {
+  constructor({ position, velocity, image, frames = { max: 1 } }) {
     this.position = position;
     this.image = image;
-    this.frames = frames
+    this.frames = frames;
   }
 
   draw() {
     c.drawImage(
-        this.image,
-        0,
-        0,
-        this.image.width / this.frames.max,
-        this.image.height,
-        this.position.x,
-        this.position.y,
-        this.image.width / this.frames.max,
-        this.image.height
-      );
+      this.image,
+      0,
+      0,
+      this.image.width / this.frames.max,
+      this.image.height,
+      this.position.x,
+      this.position.y,
+      this.image.width / this.frames.max,
+      this.image.height
+    );
   }
 }
 
 const player = new Sprite({
-    position: {
-        x: canvas.width / 2 - 192 / 4 / 2,
-        y: canvas.height / 2 - 68 / 2
-    },
-    image: playerImage,
-    frames: {
-        max: 4
-    }
-})
-
-
+  position: {
+    x: canvas.width / 2 - 192 / 4 / 2,
+    y: canvas.height / 2 - 68 / 2,
+  },
+  image: playerImage,
+  frames: {
+    max: 4,
+  },
+});
 
 const background = new Sprite({
   position: {
@@ -125,7 +123,7 @@ function animation() {
   //     Boundary.draw()
   // })
   testBoundary.draw();
-  player.draw()
+  player.draw();
 
   if (keys.w.pressed && lastKey === "w") {
     moveables.forEach((moveable) => {
@@ -147,7 +145,7 @@ function animation() {
 }
 animation();
 
-let lastKey = '';
+let lastKey = "";
 window.addEventListener("keydown", (e) => {
   switch (e.key) {
     case "w":
