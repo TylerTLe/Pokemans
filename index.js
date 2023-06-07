@@ -300,7 +300,7 @@ function animation() {
   }
 }
 
-animation();
+// animation();
 
 const battleBackgroundImage = new Image()
 battleBackgroundImage.src = './Images/battleBackground.png'
@@ -322,6 +322,21 @@ const draggle = new Sprite({
   image: draggleImage,
   frames: {
     max: 4,
+    hold: 70
+  },
+  animate: true
+}) 
+
+const embyImage = new Image()
+embyImage.src = './Images/embySprite.png'
+const emby = new Sprite({
+  position: {
+    x:280,
+    y:325
+  },
+  image: embyImage,
+  frames: {
+    max: 4,
     hold: 40
   },
   animate: true
@@ -331,7 +346,10 @@ function animateBattle() {
   window.requestAnimationFrame(animateBattle)
   battleBackground.draw()
   draggle.draw()
+  emby.draw()
 }
+// For testing
+animateBattle()
 
 let lastKey = "";
 window.addEventListener("keydown", (e) => {
