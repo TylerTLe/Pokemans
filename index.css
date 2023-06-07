@@ -2,11 +2,24 @@
     font-family: 'pixel';
     src: url(./Fonts/pixeloid-font/PixeloidSans-mLxMm.ttf)format('opentype');
 }
-
+* {
+    font-family: 'pixel', sans-serif;
+}
 body {
     background-color: #6C9D85;
 }
-
+h1 {
+    margin: 0;
+    font-size: 16px;
+}
+button {
+    border: 0;
+    cursor: pointer;
+    font-size: 16px;
+}
+button:hover {
+    background-color: #BBB;
+}
 .bg {
     display: inline-block;
     position: relative;
@@ -31,7 +44,6 @@ canvas {
     right: 0;
     bottom: 0;
     left: 0;
-
     border: 5px solid black;
     border-radius: 10px 10px 10px 10px;
     box-shadow: 0 0 10px black;
@@ -40,13 +52,28 @@ canvas {
     font-family: 'pixel', sans-serif;
 }
 
-/* canvas {
+.attackBar{
+    background-color: white;
+    height: 140px;
     position: absolute;
-    top: 25px;
-    right: 0;
-    bottom: 0;
-    left: 475px;
-    border: 5px solid black;
-    border-radius: 10px 10px 10px 10px;
-    box-shadow: 0 0 10px black;
-} */
+    bottom: 9px;
+    left: 5px;
+    right: 5px;
+    border-top: 4px solid black;
+    border-radius: 0px 0px 10px 10px;
+    display: flex;
+}
+
+.attacks {
+    width: 66.66%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.attackTypes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 33.33%;
+    border-left: 4px solid black;
+}
