@@ -300,7 +300,7 @@ function animation() {
   }
 }
 
-// animation();
+animation();
 
 const battleBackgroundImage = new Image()
 battleBackgroundImage.src = './Images/battleBackground.png'
@@ -348,8 +348,6 @@ function animateBattle() {
   draggle.draw()
   emby.draw()
 }
-// For testing
-animateBattle()
 
 let lastKey = "";
 window.addEventListener("keydown", (e) => {
