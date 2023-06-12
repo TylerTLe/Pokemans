@@ -12,11 +12,40 @@
     <div class = "bg">
         <div class = "battleFade" id="overlappingDiv"></div>
         <canvas></canvas>
+        <div id="userInterface">
+        <div class="enemyHealthBar">
+            <h1 style="font-size: 16px;">Draggle</h1>
+            <div style="position: relative;">
+            <div style="height: 5px; background-color: #bbb; margin-top: 10px;"></div>
+            <div id="enemyHealth" style="height: 5px; background-color: greenyellow; position: absolute; top: 0; left: 0; right: 0;"></div>
+        </div>
+        </div>
+        <div class="userHealthBar">
+            <h1 style="font-size: 16px;">Fyre</h1>
+            <div style="position: relative;">
+            <div style="height: 5px; background-color: #bbb; margin-top: 10px;"></div>
+            <div id ="userHealth" style="height: 5px; background-color: greenyellow; position: absolute; top: 0; left: 0; right:0;"></div>
+        </div>
+        </div>
+        <div class="attackBar">
+            <div class="dialogue">jdaisds</div>
+            <div class="attacks">                         
+            </div>
+            <div class="attackTypes">
+                <h1 id="attackType">Attack Type</h1>
+            </div>
+        </div>
     </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./data/audio.js"></script>
     <script src="./data/battleZones.js"></script>
     <script src="./data/collisions.js"></script>
+    <script src="./data/attacks.js"></script>
+    <script src="./data/monsters.js"></script>
     <script src="./class.js"></script>
     <script src="./index.js"></script>
+    <script src="./battles.js"></script>
 </body>
 </html>

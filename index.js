@@ -51,8 +51,6 @@ battleZonesMap.forEach((row, i) => {
   });
 })
 
-console.log(battleZones)
-
 // Map Image
 const image = new Image();
 image.src = "./Images/Pellet Town.png";
@@ -185,6 +183,7 @@ function animation() {
               duration: 0.4,
               onComplete() {
                 // Activate new animation loop
+                initBattle()
                 animateBattle()
                 gsap.to('#overlappingDiv', {
                   opacity: 0,
@@ -298,55 +297,6 @@ function animation() {
       moveable.position.x -= 3;
     });
   }
-}
-
-animation();
-
-const battleBackgroundImage = new Image()
-battleBackgroundImage.src = './Images/battleBackground.png'
-const battleBackground = new Sprite({
-  position: {
-    x: 0,
-    y: 0
-  },
-  image: battleBackgroundImage
-})
-
-const draggleImage = new Image()
-draggleImage.src = './Images/draggleSprite.png'
-const draggle = new Sprite({
-  position: {
-    x:800,
-    y:100
-  },
-  image: draggleImage,
-  frames: {
-    max: 4,
-    hold: 70
-  },
-  animate: true
-}) 
-
-const embyImage = new Image()
-embyImage.src = './Images/embySprite.png'
-const emby = new Sprite({
-  position: {
-    x:280,
-    y:325
-  },
-  image: embyImage,
-  frames: {
-    max: 4,
-    hold: 40
-  },
-  animate: true
-}) 
-
-function animateBattle() {
-  window.requestAnimationFrame(animateBattle)
-  battleBackground.draw()
-  draggle.draw()
-  emby.draw()
 }
 
 let lastKey = "";
