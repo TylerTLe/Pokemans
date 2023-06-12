@@ -51,8 +51,6 @@ battleZonesMap.forEach((row, i) => {
   });
 })
 
-console.log(battleZones)
-
 // Map Image
 const image = new Image();
 image.src = "./Images/Pellet Town.png";
@@ -185,6 +183,7 @@ function animation() {
               duration: 0.4,
               onComplete() {
                 // Activate new animation loop
+                initBattle()
                 animateBattle()
                 gsap.to('#overlappingDiv', {
                   opacity: 0,
@@ -299,8 +298,6 @@ function animation() {
     });
   }
 }
-// change this back when pushing code
-// animation();
 
 let lastKey = "";
 window.addEventListener("keydown", (e) => {

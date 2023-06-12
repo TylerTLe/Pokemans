@@ -37,6 +37,7 @@ button:hover {
     border-radius: 10px 10px 10px 10px;
     opacity: 0;
     pointer-events: none;
+    z-index: 10;
 }
 
 canvas {
@@ -110,4 +111,8 @@ canvas {
     border-radius: 0px 0px 10px 10px;
     display: none;
     cursor: pointer;
+}
+
+#userInterface{
+    display: none;
 }
