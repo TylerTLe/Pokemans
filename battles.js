@@ -8,40 +8,18 @@ const battleBackground = new Sprite({
   image: battleBackgroundImage
 })
 
-const draggleImage = new Image()
-draggleImage.src = './Images/draggleSprite.png'
-const draggle = new Sprite({
-  position: {
-    x:800,
-    y:100
-  },
-  image: draggleImage,
-  frames: {
-    max: 4,
-    hold: 70
-  },
-  animate: true,
-  isEnemy: true,
-  name: "Draggle"
-}) 
-
-const embyImage = new Image()
-embyImage.src = './Images/embySprite.png'
-const emby = new Sprite({
-  position: {
-    x:280,
-    y:325
-  },
-  image: embyImage,
-  frames: {
-    max: 4,
-    hold: 40
-  },
-  animate: true,
-  name: "Fyre"
-}) 
+const draggle = new Monster(monsters.Draggle) 
+const emby = new Monster(monsters.Emby)
 
 const renderedSprites = [draggle, emby]
+
+emby.attacks.forEach(attack => {
+    const button = document.createElement('button')
+    button.innerHTML = attack.name
+    document.querySelector(".attacks").append(button)
+})
+
+
 function animateBattle() {
   window.requestAnimationFrame(animateBattle)
   battleBackground.draw()
@@ -65,14 +43,23 @@ document.querySelectorAll('button').forEach((button) => {
       recipient: draggle,
       renderedSprites
     })
+
+    const randomAttack = draggle.attacks[Math.floor(Math.random() * draggle.attacks.length)]
+
     queue.push(() => {
         draggle.attack({
-            attack: attacks.Tackle,
+            attack: randomAttack,
             recipient: emby,
             renderedSprites
           })
+        })
     })
-  })
+    // Changes attack type 
+    button.addEventListener('mouseenter', (e) => {
+        const selectedAttack = attacks[e.currentTarget.innerHTML]
+        document.querySelector('#attackType').innerHTML = selectedAttack.type
+        document.querySelector('#attackType').style.color = selectedAttack.color
+    })
 }) 
 
 document.querySelector(".dialogue").addEventListener('click', (e) => {

@@ -1,5 +1,11 @@
 class Sprite {
-    constructor({ position, image, frames = { max: 1, hold: 10 }, sprites, animate = false, isEnemy=false, rotation=0 , name}) {
+    constructor({ 
+      position, 
+      image, 
+      frames = { max: 1, hold: 10 }, 
+      sprites, 
+      animate = false, 
+      rotation=0}) {
       this.position = position;
       this.image = image;
       this.frames = {...frames, val: 0, elapsed: 0};
@@ -11,10 +17,7 @@ class Sprite {
       this.animate = animate
       this.sprites = sprites
       this.opacity = 1
-      this.health = 100
-      this.isEnemy = isEnemy
       this.rotation = rotation
-      this.name = name
     }
   
     draw() {
@@ -43,100 +46,126 @@ class Sprite {
           if (this.frames.val < this.frames.max - 1) this.frames.val++
           else this.frames.val = 0
         }
-    }
-    attack({ attack, recipient, renderedSprites }) {
-      document.querySelector('.dialogue').style.display = 'block'
-      document.querySelector('.dialogue').innerHTML = this.name + ' used ' + attack.name
+    }  
+  }
 
-      let healthBar = '#enemyHealth'
-      if (this.isEnemy) healthBar = '#userHealth'
+class Monster extends Sprite {
+  constructor({ position, 
+    image, 
+    frames = { max: 1, hold: 10 }, 
+    sprites, 
+    animate = false, 
+    rotation=0,
+    name, 
+    isEnemy=false,
+    attacks
+  }) {
+    super({
+      position, 
+      image, 
+      frames, 
+      sprites, 
+      animate, 
+      rotation
+    })
+    this.name = name
+    this.isEnemy = isEnemy
+    this.health = 100
+    this.attacks = attacks
+  }
+  attack({ attack, recipient, renderedSprites }) {
+    document.querySelector('.dialogue').style.display = 'block'
+    document.querySelector('.dialogue').innerHTML = this.name + ' used ' + attack.name
 
-      let rotation = 1
-      if (this.isEnemy) rotation = -2.5
+    let healthBar = '#enemyHealth'
+    if (this.isEnemy) healthBar = '#userHealth'
 
-      this.health -= attack.damage
+    let rotation = 1
+    if (this.isEnemy) rotation = -2.5
 
-      switch (attack.name) {
-        case 'Fireball':
-          const fireballImage = new Image()
-          fireballImage.src = './Images/fireball.png'
-          const fireball = new Sprite({
-            position: {
-              x: this.position.x,
-              y: this.position.y
-            },
-            image: fireballImage,
-            frames: {
-              max: 4,
-              hold: 10
-            },
-            animate: true,
-            rotation
-          })
-          
-          renderedSprites.splice(1,0, fireball)
+    this.health -= attack.damage
 
-          gsap.to(fireball.position, {
-            x: recipient.position.x,
-            y: recipient.position.y,
-            onComplete: () => {
-              gsap.to(healthBar, {
-                width: this.health + '%'
-              })
-              gsap.to(recipient.position, {
-                x: recipient.position.x + 10,
-                yoyo: true,
-                repeat: 5,
-                duration: 0.08,
-              })
-    
-              gsap.to(recipient, {
-                opacity: 0,
-                repeat: 5,
-                yoyo: true,
-                duration: 0.08
-              })
-              renderedSprites.splice(1,1)
-            }
-          })
+    switch (attack.name) {
+      case 'Fireball':
+        const fireballImage = new Image()
+        fireballImage.src = './Images/fireball.png'
+        const fireball = new Sprite({
+          position: {
+            x: this.position.x,
+            y: this.position.y
+          },
+          image: fireballImage,
+          frames: {
+            max: 4,
+            hold: 10
+          },
+          animate: true,
+          rotation
+        })
+        
+        renderedSprites.splice(1,0, fireball)
 
-          break
-        case 'Tackle':
-          const tl = gsap.timeline()
-    
-          let movementDistance = 20
-          if (this.isEnemy) movementDistance = - 20
-    
-           tl.to(this.position, {
-            x: this.position.x - movementDistance
-           }).to(this.position, {
-            x: this.position.x + movementDistance * 2,
-            duration: 0.1,
-            onComplete: () => {
-              gsap.to(healthBar, {
-                width: this.health + '%'
-              })
-              gsap.to(recipient.position, {
-                x: recipient.position.x + 10,
-                yoyo: true,
-                repeat: 5,
-                duration: 0.08,
-              })
-    
-              gsap.to(recipient, {
-                opacity: 0,
-                repeat: 5,
-                yoyo: true,
-                duration: 0.08
-              })
-            }
-           }).to(this.position, {
-            x: this.position.x
-           })
-        break;
-      }
+        gsap.to(fireball.position, {
+          x: recipient.position.x,
+          y: recipient.position.y,
+          onComplete: () => {
+            gsap.to(healthBar, {
+              width: this.health + '%'
+            })
+            gsap.to(recipient.position, {
+              x: recipient.position.x + 10,
+              yoyo: true,
+              repeat: 5,
+              duration: 0.08,
+            })
+  
+            gsap.to(recipient, {
+              opacity: 0,
+              repeat: 5,
+              yoyo: true,
+              duration: 0.08
+            })
+            renderedSprites.splice(1,1)
+          }
+        })
+
+        break
+      case 'Tackle':
+        const tl = gsap.timeline()
+  
+        let movementDistance = 20
+        if (this.isEnemy) movementDistance = - 20
+  
+         tl.to(this.position, {
+          x: this.position.x - movementDistance
+         }).to(this.position, {
+          x: this.position.x + movementDistance * 2,
+          duration: 0.1,
+          onComplete: () => {
+            gsap.to(healthBar, {
+              width: this.health + '%'
+            })
+            gsap.to(recipient.position, {
+              x: recipient.position.x + 10,
+              yoyo: true,
+              repeat: 5,
+              duration: 0.08,
+            })
+  
+            gsap.to(recipient, {
+              opacity: 0,
+              repeat: 5,
+              yoyo: true,
+              duration: 0.08
+            })
+          }
+         }).to(this.position, {
+          x: this.position.x
+         })
+      break;
     }
   }
+}
 
 class Boundary {
     static height = 48;
