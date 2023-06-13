@@ -110,9 +110,6 @@ function animateBattle() {
 }
 
 animation()
-// // // remove this when pushing code
-// initBattle()
-// animateBattle()
 
 document.querySelector(".dialogue").addEventListener('click', (e) => {
     if (queue.length > 0) {

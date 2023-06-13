@@ -166,7 +166,6 @@ function animation() {
         overlappingArea > (player.width * player.height) / 2 && 
         Math.random() < 0.02 
       ) {
-        console.log('Activating battle')
 
         // deactive current animation loop
         window.cancelAnimationFrame(animationId)
@@ -337,3 +336,11 @@ window.addEventListener("keyup", (e) => {
       break;
   }
 });
+
+let clicked = false
+addEventListener('click', () => {
+  if (!clicked) {
+    audio.Map.play()
+    clicked = true
+  }
+})
