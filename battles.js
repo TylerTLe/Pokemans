@@ -56,6 +56,8 @@ document.querySelectorAll('button').forEach((button) => {
                           opacity:0
                       })
                       battle.initiated = false
+                      audio.map.play()
+                      
                   }
               })
           })
@@ -85,6 +87,7 @@ document.querySelectorAll('button').forEach((button) => {
                                 opacity:0
                             })
                             battle.initiated = false
+                            audio.map.play()
                         }
                     })
                 })
