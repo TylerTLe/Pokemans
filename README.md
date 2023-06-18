@@ -4,7 +4,12 @@ Welcome to my JavaScript Pokemon derivative. This repository contains the source
 
 The game simulates a pocket monster world, where players embark on a thrilling adventure exploring diverse environments, catching exotic creatures, and battling against formidable foes, all within the confines of their browser. As trainers, players can evolve their creatures, explore new lands, and strive to become the ultimate monster master!
 
-languages used in this:
-Javascript
-HTML
-CSS
+Can be played at: https://tylerle.me/Pokemans/
+
+W = up
+A = left
+S = down
+D = right
+
+Walk into the dark grass to interact enemys 
+
